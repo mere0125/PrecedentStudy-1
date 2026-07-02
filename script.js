@@ -3,6 +3,13 @@ const sourceCards = document.querySelectorAll('.source-card');
 const keywordButtons = document.querySelectorAll('.keyword-cloud button');
 const topButton = document.querySelector('.top-button');
 
+function filterSources(filter) {
+  sourceCards.forEach((card) => {
+    const shouldShow = filter === 'all' || card.dataset.type === filter;
+    card.classList.toggle('is-hidden', !shouldShow);
+  });
+}
+
 tabs.forEach((tab) => {
   tab.addEventListener('click', () => {
     const filter = tab.dataset.filter;
@@ -15,10 +22,7 @@ tabs.forEach((tab) => {
     tab.classList.add('active');
     tab.setAttribute('aria-selected', 'true');
 
-    sourceCards.forEach((card) => {
-      const shouldShow = filter === 'all' || card.dataset.type === filter;
-      card.classList.toggle('is-hidden', !shouldShow);
-    });
+    filterSources(filter);
   });
 });
 
@@ -35,4 +39,5 @@ window.addEventListener('scroll', () => {
 topButton.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
-document.querySelector('.tab.active').click();
+
+filterSources('primary');
