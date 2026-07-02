@@ -35,3 +35,4 @@ window.addEventListener('scroll', () => {
 topButton.addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
+document.querySelector('.tab.active').click();
